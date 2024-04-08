@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-import { Description } from "./Components/Description";
-import { Options } from "./Components/Options";
-import { Feedback } from "./Components/Feedback";
-import { Notification } from "./Components/Notification";
+import { Description } from "./Сomponents/Description/Description";
+import { Options } from "./Сomponents/Options/Options";
+import { Feedback } from "./Сomponents/Feedback/Feedback";
+import { Notification } from "./Сomponents/Notification/Notification";
 
 function App() {
   const getResetFeedback = () => {
