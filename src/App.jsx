@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import { Description } from "./Сomponents/Description/Description";
 import { Options } from "./Сomponents/Options/Options";
-import { Feedback } from "./Сomponents/Feedback/Feedback";
+import { Feedback } from "./Сomponents/Feedback/Feedback.1";
 import { Notification } from "./Сomponents/Notification/Notification";
 
 function App() {
