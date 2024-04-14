@@ -1,26 +1,25 @@
 import { useState } from 'react';
-import { useEffect } from 'react'; 
+import { useEffect } from 'react';
 
-import { Description } from "./Components/Description"
-import { Options } from "./Components/Options"
+import { Description } from './Components/Description';
+import { Options } from './Components/Options';
 import { Feedback } from './Components/Feedback';
 import { Notification } from './Components/Notification';
 
 function App() {
-
-  const getResetFeedback = () =>{
+  const getResetFeedback = () => {
     return {
       good: 0,
       neutral: 0,
-      bad: 0
+      bad: 0,
     };
   };
 
-  const KEY_FEEDBACK_LS = "Feedback";
+  const KEY_FEEDBACK_LS = 'Feedback';
 
   const [feedback, setFeedback] = useState(() => {
     const savedObject = window.localStorage.getItem(KEY_FEEDBACK_LS);
-    if(savedObject){
+    if (savedObject) {
       try {
         return JSON.parse(savedObject);
       } catch (error) {
@@ -32,32 +31,43 @@ function App() {
 
   useEffect(() => {
     window.localStorage.setItem(KEY_FEEDBACK_LS, JSON.stringify(feedback));
-  }, [feedback])
+  }, [feedback]);
 
-  const handlerBtn = (event) =>{
-    if(event.target.type === "button"){
-      if(event.target.name === "reset"){
+  const handlerBtn = event => {
+    if (event.target.type === 'button') {
+      if (event.target.name === 'reset') {
         setFeedback(getResetFeedback);
-      }
-      else{
+      } else {
         setFeedback({
           ...feedback,
           [event.target.name]: ++feedback[event.target.name],
-        })
-        }
+        });
       }
+    }
+  };
 
-  }
-
-  const totalFeedback = feedback ? feedback.good + feedback.neutral + feedback.bad : 0;
+  const totalFeedback = feedback
+    ? feedback.good + feedback.neutral + feedback.bad
+    : 0;
+  const positiveFeedback = Math.round(
+    ((feedback.good + feedback.neutral) / totalFeedback) * 100
+  );
 
   return (
     <>
-      <Description/>
-      <Options handlerBtn={handlerBtn} totalFeedback={totalFeedback}/>
-      { totalFeedback ? <Feedback feedback={feedback} totalFeedback={totalFeedback}/> : <Notification/>}
+      <Description />
+      <Options handlerBtn={handlerBtn} totalFeedback={totalFeedback} />
+      {totalFeedback ? (
+        <Feedback
+          feedback={feedback}
+          totalFeedback={totalFeedback}
+          positiveFeedback={positiveFeedback}
+        />
+      ) : (
+        <Notification />
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

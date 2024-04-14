@@ -1,5 +1,6 @@
 export const Feedback = ({
   feedback: { good, neutral, bad },
+  positiveFeedback,
   totalFeedback,
 }) => {
   return (
@@ -8,7 +9,7 @@ export const Feedback = ({
       <p>Neutral: {neutral}</p>
       <p>Bad: {bad}</p>
       <p>Total: {totalFeedback}</p>
-      <p>Positeve: {Math.round(((good + neutral) / totalFeedback) * 100)}%</p>
+      <p>Positeve: {positiveFeedback}%</p>
     </div>
   );
 };
